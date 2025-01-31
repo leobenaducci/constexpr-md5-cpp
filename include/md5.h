@@ -23,6 +23,10 @@
 #include <cstdint>
 #include <cstring>
 
+#ifdef __cpp_lib_string_view
+#include <string_view>
+#endif //__cpp_lib_string_view
+
 namespace md5 {
     using Digest = std::array<unsigned char, 16>;
 
@@ -216,6 +220,14 @@ namespace md5 {
         c.append(s, details::const_strlen(s));
         return c.final();
     }
+
+#ifdef __cpp_lib_string_view
+    constexpr Digest compute(std::string_view s) noexcept {
+        details::Context c;
+        c.append(s.data(), s.length());
+        return c.final();
+    }
+#endif //__cpp_lib_string_view
 }
 
 #endif
