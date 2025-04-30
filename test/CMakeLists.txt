@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.0...3.5)
+
 add_subdirectory(external/doctest)
 
 add_executable(constexpr_md5_unit_tests main.cc)
